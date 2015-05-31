@@ -1,0 +1,31 @@
+<div class="container">
+    <table class="table table-bordered" style="margin: 0;"> <!-- to avoid gap between tables-->
+        <tr class="info">
+            <td><h1><b class="text-info">Contacts book</b></h1></td>
+        </tr>
+        <tr>
+            <td>This Contacts book contains {{contactBook.amount}} contacts</td>
+        </tr>
+    </table>
+    <div class="table-responsive" ng-controller="sortController as sort">
+        <table class="table">
+            <tbody class="table-bordered"> <!-- didn't use <thead> because of fat line after header-->
+            <tr>
+                <th><h3><a href ng-click="reverse=!reverse;sort.order('firstName.v', reverse)">Name</a></h3></th>
+                <th><h3><a href ng-click="reverse=!reverse;sort.order('name.v', reverse)">Surname</a></h3></th>
+                <th><h3><a href ng-click="reverse=!reverse;sort.order('birthDate.v', reverse)">Age</a></h3></th>
+                <th><h3><a href ng-click="reverse=!reverse;sort.order('tel.v', reverse)">Phone</a></h3></th>
+                <th><h3><a href ng-click="reverse=!reverse;sort.order('address.v', reverse)">Address</a></h3></th>
+            </tr>
+            <tr ng-repeat="contact in contactBook.contacts" ng-class="sort.birthDaySoon(contact.birthDate.v)">
+                <td>{{contact.firstName.v}}</td>
+                <td>{{contact.name.v}}</td>
+                <td>{{sort.calcAge(contact.birthDate.v)}}</td>
+                <td><a href="{{sort.makeCall(contact.tel.v)}}">{{contact.tel.v}}</a></td>
+                <td><a href="{{sort.findOnMap(contact.address.v)}}">{{contact.address.v}}</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
